@@ -25,7 +25,8 @@ public class PenteBoardSquare {
 	
 	private Color shadowGrey = new Color(169, 173, 142);
 
-	boolean isInner = false;
+	private boolean isInner = false;
+	private boolean isWinningSquare = false;
 	
 	//constructor
 	public PenteBoardSquare(int x, int y, int w, int h) {
@@ -45,7 +46,7 @@ public class PenteBoardSquare {
 	}
 	
 	public void setInner() {
-		System.out.println("Setting Inner for " + xLoc + ", " + yLoc);
+		
 		isInner = true;
 	}
 	
@@ -124,10 +125,17 @@ public class PenteBoardSquare {
 			
 		}
 		
-		
-	
-	
-	
+		if(isWinningSquare) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setStroke(new BasicStroke(2));
+			
+			g2.setColor(Color.RED);
+			
+			g2.drawOval(xLoc + 2, yLoc + 2, sWidth - 4, sHeight - 4);
+			
+			g2.setStroke(new BasicStroke(1));
+		}
+
 	}
 	
 	//Methods
@@ -145,10 +153,11 @@ public class PenteBoardSquare {
 		} else {
 			sState = newState;
 		}
-		
-		
-		
-		
+			
+	}
+	
+	public int getState() {
+		return sState;
 	}
 
 	public void setXLoc(int i) {
@@ -170,5 +179,22 @@ public class PenteBoardSquare {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public boolean isClicked(int clickX, int clickY) {
+		boolean didYouClickMe = false;
+		
+		if( xLoc < clickX && clickX < xLoc + sWidth) {
+			if( yLoc < clickY && clickY < yLoc + sWidth) {
+				didYouClickMe = true;
+			}
+		}
+		
+		return didYouClickMe;
+	}
+	
+	public void setWinningSquare(boolean newState) {
+		isWinningSquare = newState;
+	}
+
 
 }
