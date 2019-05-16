@@ -128,7 +128,7 @@ public class PenteGameBoard extends JPanel implements MouseListener{
 				
 			}	
 		} 
-		this.paintImmediately(0, 0, bWidth, bHeight); //good
+		//this.paintImmediately(0, 0, bWidth, bHeight); 
 	}
 	
 	public void startNewGame(boolean firstGame) {
@@ -287,6 +287,20 @@ public class PenteGameBoard extends JPanel implements MouseListener{
 					} else {
 						darkStoneMove2Taken = true;
 					}
+		}
+				
+		return dsp;
+	}
+	
+	public boolean darkSquareProblemComputerMoveList(int r, int c) {
+		
+		boolean dsp = false;
+		
+		if((darkStoneMove2Taken == false) && (playerTurn == BLACKSTONE)) {
+			
+			if((r >= INNER_START && r <= INNER_END) && (c >= INNER_START && c <= INNER_END)) {
+						dsp = true;
+					} 
 		}
 				
 		return dsp;
@@ -590,7 +604,10 @@ public class PenteGameBoard extends JPanel implements MouseListener{
 		return gameBoard;
 	}
 	
-	
+	public boolean getDarkStoneMove2Taken() {
+		return darkStoneMove2Taken;
 	}
+	
+}
 	
 
